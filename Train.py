@@ -54,8 +54,8 @@ def val(model, epoch, save_path, writer):
         # test_loader = test_dataset(image_root=opt.test_path + 'Imgs/',
         #                           gt_root=opt.test_path + 'GT/',
         #                           testsize=opt.trainsize)
-        test_loader = test_dataset(image_root=opt.test_path + '/Image/',
-                            gt_root=opt.test_path + '/GT_Object/',
+        test_loader = test_dataset(image_root=opt.test_path + '/images/',
+                            gt_root=opt.test_path + '/GT/',
                             testsize=opt.trainsize)
 
         for i in range(test_loader.size):
@@ -159,9 +159,9 @@ if __name__ == '__main__':
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--decay_rate', type=float,default=0.1, help='decay rate of learning rate')
     parser.add_argument('--decay_epoch', type=int,default=50, help='every n epochs decay learning rate')
-    parser.add_argument('--train_path', type=str,default='/root/cod/datasets/COD10K-v3/Train',help='path to train dataset')
-    parser.add_argument('--test_path', type=str,default='/root/cod/datasets/COD10K-v3/Test',help='path to testing dataset')
-    parser.add_argument('--save_path', type=str,default='/root/cod/HitNet/results/COD10k/'+model_name+'/')
+    parser.add_argument('--train_path', type=str,default='/home/amin_chini/cod/datasets/MHCD_COD10K/train',help='path to train dataset')
+    parser.add_argument('--test_path', type=str,default='/home/amin_chini/cod/datasets/MHCD_COD10K/test',help='path to testing dataset')
+    parser.add_argument('--save_path', type=str,default='/home/amin_chini/cod/HitNet/results/MHCD_COD10K/'+model_name+'/')
     parser.add_argument('--epoch_save', type=int,default=1, help='every n epochs to save model')
     opt = parser.parse_args()
 
@@ -200,8 +200,8 @@ if __name__ == '__main__':
         optimizer = torch.optim.SGD(params, opt.lr, weight_decay=1e-4, momentum=0.9)
 
     print(optimizer)
-    image_root = '{}/Image/'.format(opt.train_path)
-    gt_root = '{}/GT_Object/'.format(opt.train_path)
+    image_root = '{}/images/'.format(opt.train_path)
+    gt_root = '{}/GT/'.format(opt.train_path)
 
     train_loader = get_loader(image_root, gt_root, batchsize=opt.batchsize, trainsize=opt.trainsize,
                               augmentation=opt.augmentation)
